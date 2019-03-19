@@ -6,4 +6,4 @@ bp = Blueprint('transcribe', __name__, url_prefix='/transcribe')
 
 @bp.route('/', methods=('GET', 'POST'))
 def presenters():
-  return "Hello transcribe!"
+  return render_template('transcribe/transcribe.html')
