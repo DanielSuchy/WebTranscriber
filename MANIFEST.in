@@ -1,0 +1,3 @@
+graft transcribe/static
+graft transcribe/templates
+global-exclude *.pyc
