@@ -43,13 +43,10 @@ class Alphabet(object):
     'b': ['b', Segment(True,True, 'bilabial', 'stop','','',False,False)],
     'p': ['p', Segment(True,False, 'bilabial', 'stop','','',False,False)],
     'l': ['l', Segment(True,True, 'alveolar', 'lateral aproximant','','',False,False)],
-    'f': ['f', Segment(True,False, 'labiodental', 'fricative','','',False,False)],
-    ' ': [' ', Segment(False,False, '', '','','',False,False)],
-    ',': [',', Segment(False,False, '', '','','',False,False)],
-    '.': ['.', Segment(False,False, '', '','','',False,False)],
-    '|': ['|', Segment(False,False, '', '','','',False,False)]
+    'f': ['f', Segment(True,False, 'labiodental', 'fricative','','',False,False)]
   }
 
+  SPECIAL_CHARS = [' ', ',', '.', '|']
   def get_symbol_by_phoneme(self, phoneme):
     for entry in Alphabet.Segments:
       if entry != ' ':
@@ -70,6 +67,9 @@ class Alphabet(object):
 
 
   def get_phonetic_representation(self, letter):
+    if letter in Alphabet.SPECIAL_CHARS:
+        return letter #these have no special phonetic representation
+
     return Alphabet.Segments[letter][0]
 
   def get_phonetic_description(self, letter):

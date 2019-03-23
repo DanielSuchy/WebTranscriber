@@ -3,6 +3,7 @@ from .Segment import Segment
 
 class Transcriber(object):
 
+  VOWELS = ['a','e','i','y','o','u','á','é','í','ý','ó','ú','ů']
   def __init__(self, text):
     self.alphabet = Alphabet()
     self.text = text.lower()
@@ -35,9 +36,9 @@ class Transcriber(object):
       segment = 'x'
     elif next_letter == 'ě':
       segment = self.handle_soft_e(letter)
-    elif (letter == ' ' and next_letter in 'aeiouáéíóúů'):
+    elif (letter == ' ' and next_letter in Transcriber.VOWELS):
       segment = ' ʔ'
-    elif (i == 0 and letter in 'aeiouáéíóúů'):
+    elif (i == 0 and letter in Transcriber.VOWELS):
       segment = 'ʔ' + letter
     elif next_letter in ['i', 'í']:
       segment = self.handle_i_palatalization(letter)
@@ -90,9 +91,9 @@ class Transcriber(object):
     else:
       next_segment = ''
 
-    if current_segment == 'r' and not (previous_segment in 'aeiouáéíóúůýy' or next_segment in 'aeiouáéíóúůýy'):
+    if current_segment == 'r' and not (previous_segment in Transcriber.VOWELS or next_segment in Transcriber.VOWELS):
       return 'r̩'
-    if current_segment == 'l'and not (previous_segment in 'aeiouáéíóúůýy' or next_segment in 'aeiouáéíóúůýy'):
+    if current_segment == 'l'and not (previous_segment in Transcriber.VOWELS or next_segment in Transcriber.VOWELS):
       return 'l̩'
 
     return current_segment
@@ -174,37 +175,3 @@ class Transcriber(object):
 
   def __str__(self):
     return self.transcription
-
-if __name__ == '__main__':
-
-  transcriber = Transcriber('')
-  # print('\n\n' + transcriber.get_last_consonant('všechny', 0))
-  # print('\n\n' + transcriber.get_last_consonant('švédský', 0))
-  # transcriber.get_next_assimilation('ch', 0)
-  # transcriber.get_next_assimilation('pes', 0)
-  # t = transcriber.apply_voicing_assimilation('d', 'k')
-  # print(t)
-
-  # t = transcriber.apply_voicing_assimilation('k', 'r')
-  # print(t)
-
-  # t = transcriber.apply_voicing_assimilation('z', 'k')
-  # print(t)
-
-  # t = Transcriber('věštba')
-  # print(str(t))
-
-  # transcriber = Transcriber('blb')
-  # print(transcriber)
-
-  # transcriber = Transcriber('tip hlásky')
-  # print(transcriber.get_last_consonant('tip hlásky', 2))
-  # print(transcriber)
-  # transcriber = Transcriber('všechny')
-  # print(transcriber)
-
-  # transcriber = Transcriber('švédský')
-  # print(transcriber)
-
-  # transcriber = Transcriber('v ústraní')
-  # print(transcriber)
