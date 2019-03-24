@@ -1,0 +1,22 @@
+body {
+  text-align: center;
+  background-color: #EEEEEE; /* Light gray */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-weight: bold;
+}
+
+textarea {
+  font-family: "Times New Roman", sans-serif;
+  font-size: 18px;
+  margin: 10px;
+  resize: none;
+}
+
+input {
+  margin: 10px;
+  width: 80px;
+  height: 30px;
+}
