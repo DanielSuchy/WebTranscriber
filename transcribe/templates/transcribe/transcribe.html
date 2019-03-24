@@ -2,13 +2,14 @@
 <html lang="cs">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/base.css">
     <title>Transkripce</title>
   </head>
   <body>
     <h1>Transkripce</h1>
     <form method="post" enctype=multipart/form-data>
-       <textarea rows="30" cols="50" name="source_text">{{ source_text }}</textarea>
-       <textarea rows="30" cols="50" name="target_text">{{ target_text }}</textarea>
+       <textarea rows="20" cols="50" name="source_text">{{ source_text }}</textarea>
+       <textarea rows="20" cols="50" name="target_text">{{ target_text }}</textarea>
        <br>
        <input type="submit" value="Přelož">
     </form>
