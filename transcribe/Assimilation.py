@@ -18,17 +18,26 @@ class Assimilation(object):
 
   def apply_voicing_assimilation(self, letter, next_letter):
     current_segment = self.alphabet.get_phonetic_description(letter)
-
-    if next_letter == ' ' and current_segment.is_obstruent == True:
-      new_segment = Segment(current_segment.is_consonant, False, current_segment.place, current_segment.manner, '', '', False, False)
-      letter = self.alphabet.get_symbol_by_phoneme(new_segment)
-      return letter
-
     next_segment = self.alphabet.get_phonetic_description(next_letter)
 
     if current_segment.place == 'labiodental' and current_segment.manner == 'fricative' and next_segment.is_obstruent == True:
       current_segment.is_obstruent = False #v behaves as non-obstruent only if is being asimilated
 
+    letter = self.change_voicing(current_segment, next_segment, letter, next_letter)
+    return letter
+
+  def change_voicing(self, current_segment, next_segment, letter, next_letter):
+    letter = self.change_endword_voicing(current_segment, next_segment, letter, next_letter)
+    letter = self.change_midword_voicing(current_segment, next_segment, letter, next_letter)
+    return letter
+
+  def change_endword_voicing(self, current_segment, next_segment, letter, next_letter):
+    if next_letter == ' ' and current_segment.is_obstruent == True:
+      new_segment = Segment(current_segment.is_consonant, False, current_segment.place, current_segment.manner, '', '', False, False)
+      letter = self.alphabet.get_symbol_by_phoneme(new_segment)
+    return letter
+
+  def change_midword_voicing(self, current_segment, next_segment, letter, next_letter):
     if (current_segment.is_obstruent == True
         and next_segment.is_consonant == True
         and next_segment.is_obstruent == True
